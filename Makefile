@@ -2,15 +2,18 @@
 
 download: tweets favorites
 
+tweets:
+	docker run -it -v $$PWD/data:/data williamsmj/savetweets ./tweets.sh
+
+favorites:
+	docker run -it -v $$PWD/data:/data williamsmj/savetweets ./favorites.sh
+
 build/savetweets: Dockerfile requirements.in tweets.sh favorites.sh
-	docker build . -t savetweets
+	docker build . -t williamsmj/savetweets
 	touch build/twitter-to-sqlite
 
-tweets: build/savetweets
-	docker run -it -v $$PWD/data:/data savetweets ./tweets.sh
-
-favorites: build/savetweets
-	docker run -it -v $$PWD/data:/data savetweets ./favorites.sh
+push: build/savetweets
+	docker push williamsmj/savetweets
 
 requirements.in: requirements.txt
 	pip-compile requirements.txt > requirements.in
