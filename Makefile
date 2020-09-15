@@ -3,10 +3,10 @@
 download: tweets favorites
 
 tweets:
-	docker run -it -v $$PWD/data:/data williamsmj/savetweets ./tweets.sh
+	docker run -v $$PWD/data:/data williamsmj/savetweets ./tweets.sh
 
 favorites:
-	docker run -it -v $$PWD/data:/data williamsmj/savetweets ./favorites.sh
+	docker run -v $$PWD/data:/data williamsmj/savetweets ./favorites.sh
 
 build/savetweets: Dockerfile requirements.in tweets.sh favorites.sh
 	docker build . -t williamsmj/savetweets
