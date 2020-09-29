@@ -16,4 +16,4 @@ push: build/savetweets
 	docker push williamsmj/savetweets
 
 requirements.in: requirements.txt
-	pip-compile requirements.txt > requirements.in
+	pip-compile requirements.in > requirements.txt
